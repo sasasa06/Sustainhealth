@@ -1,0 +1,107 @@
+import random
+from colorama import Fore, Style
+
+def view_habits(tracker):
+    habit_list = ""
+    for habit_name, completed in tracker.items():
+        status = f"{Fore.GREEN}Completed{Style.RESET_ALL}" if completed else f"{Fore.RED}Not Completed{Style.RESET_ALL}"
+        habit_list += f"{habit_name}: [{status}]\n"
+    return habit_list
+
+def main():
+    tracker = {}
+    chosen_habits = []
+
+    print("Welcome to Saachi's Eco-Friendly Healthy Habit Tracker!")
+    print("Let's add some eco-friendly habits and spread happiness & awareness around.")
+
+    # List of 8 habits
+    habits_list = [
+        "Use a reusable water bottle",
+        "Eat a plant-based meal",
+        "Walk or bike instead of driving",
+        "Plant a tree",
+        "Reduce food waste",
+        "Conserve water",
+        "Save Electricity",
+        "Recycle and properly dispose of waste"
+    ]
+
+    # Dictionary of habits with benefits and fun facts
+    habits_info = {
+        "Use a reusable water bottle": {
+            "Fun Fact": "It takes about 450 years for a plastic bottle to decompose.",
+            "Benefit": "Reduces plastic waste and saves money."
+        },
+        "Eat a plant-based meal": {
+            "Fun Fact": "Producing plant-based foods requires less water and land compared to animal-based foods.",
+            "Benefit": "Reduces carbon footprint and promotes a healthy diet."
+        },
+        "Walk or bike instead of driving": {
+            "Fun Fact": "Walking for 30 minutes a day can improve heart and all body health.",
+            "Benefit": "Reduces air pollution and increases physical activity."
+        },
+        "Plant a tree": {
+            "Fun Fact": "A single tree can absorb up to 21,772 litres of carbon dioxide per year.",
+            "Benefit": "Enhances air quality and provides habitat for wildlife."
+        },
+        "Reduce food waste": {
+            "Fun Fact": "Approximately one-third of all food produced in the world goes to waste.",
+            "Benefit": "Saves food and helps the needy to overcome hunger."
+        },
+        "Conserve water": {
+            "Fun Fact": "Only 1% of the world's water is available for drinking.",
+            "Benefit": "Preserves water sources and reduces water scarcity."
+        },
+        "Save electricity": {
+        "Fun Fact": "Turning off unused appliances saves energy and reduces carbon emissions.",
+        "Benefit": "Lowers electricity bills and helps combat climate change."
+        },
+        "Recycle and properly dispose of waste": {
+            "Fun Fact": "Recycling one aluminum can save enough energy to run a TV for three hours.",
+            "Benefit": "Conserves resources and reduces landfill waste."
+        }
+    }
+    print("\nBest Habits:")
+    for i, habit_name in enumerate(habits_list, start=1):
+        print(f"{i}. {habit_name}")
+
+    print("\nMenu:")
+    print("1. Learn about a Habit")
+    print("2. Choose 3 Habits")
+
+    choice = input("Enter your choice (1-2): ")
+
+    if choice == "1":
+        habit_number = int(input("Enter the habit number you want to learn about: "))
+        if 1 <= habit_number <= 8:
+            habit_name = habits_list[habit_number - 1]
+            print(f"\nHabit: {Fore.RED}{habit_name}{Style.RESET_ALL}")
+            print(f"Fun Fact: {Fore.CYAN}{habits_info[habit_name]['Fun Fact']}{Style.RESET_ALL}")
+            print(f"Benefit: {Fore.GREEN}{habits_info[habit_name]['Benefit']}{Style.RESET_ALL}")
+        else:
+            print("Invalid habit number.")
+    elif choice == "2":
+        print("Choose 3 Habits:")
+        for i in range(3):
+            habit_number = int(input(f"Enter habit {i+1} number: "))
+            if 1 <= habit_number <= 8:
+                habit_name = habits_list[habit_number - 1]
+                chosen_habits.append(habit_name)
+                habits_list.remove(habit_name)
+                print(f"You chose habit {i+1}: {Fore.RED}{habit_name}{Style.RESET_ALL}")
+            else:
+                print("Invalid habit number.")
+    else:
+        print("Invalid choice. Please try again.")
+
+    print("\nCongratulations on choosing the following habits:")
+    for i, habit_name in enumerate(chosen_habits, start=1):
+        print(f"{i}. {Fore.RED}{habit_name}{Style.RESET_ALL}")
+        print(f"   Fun Fact: {Fore.CYAN}{habits_info[habit_name]['Fun Fact']}{Style.RESET_ALL}")
+        print(f"   Benefit: {Fore.GREEN}{habits_info[habit_name]['Benefit']}{Style.RESET_ALL}")
+
+    print("\nThank you for using the Eco-Friendly Healthy Habit Tracker, practice these habits and spread the awareness!")
+
+if __name__ == '__main__':
+    main()
